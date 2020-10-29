@@ -5,19 +5,22 @@
 
 class RomiChassis{
     private:
-        //Romi specific constants:
-        // !!! ATTENTION !!!
-        const float N_wheel = 0; //how many counts equate to one wheel rotation?
-        const float R_wheel = 0; //what is the radius of a Romi wheel in [mm]
+        const float N_wheel = 1440; //how many counts equate to one wheel rotation?
+        const float R_wheel = 35; //what is the radius of a Romi wheel in [mm]
         const float C_wheel = 2*PI*R_wheel; //circumference of wheel
 
         //declare variables for PI controller
         float target_left = 0;
         float target_right = 0;
-        float Kp = 0.3;
+        float Kp = .3;
         float Ki = 0.1;
         float E_left = 0; //accumulated errors
         float E_right = 0;
+        float E_lprev = 0;
+        float E_rprev = 0;
+        float E_lsum = 0;
+        float E_rsum = 0;
+
 
         //encoder and motor objects
         Romi32U4Encoders encoders;
@@ -44,7 +47,7 @@ class RomiChassis{
         void UpdateEffortDriveWheelsPI(int a, int b);
 
         void MotorControl(void);
-        void SerialPlotter(float a, float b, float c, float d);
+        void SerialPlotter(float a, float b, float c, float d, float e, float f, float g);
 
         void StartDriving(float, float, uint32_t);
         bool CheckDriveComplete(void);

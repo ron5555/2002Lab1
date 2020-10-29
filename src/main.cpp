@@ -11,6 +11,22 @@ Romi32U4ButtonA buttonA;
 
 void setup() {
     Serial.begin(115200);
+    //while(!buttonA.getSingleDebouncedRelease());
+    /*
+    while(!chassis.CheckDriveComplete()){
+      chassis.UpdateEffortDriveWheels(100, 100);
+      chassis.MotorControl();
+      Serial.print(millis());
+      Serial.print(" ");
+      Serial.print(chassis.SpeedLeft());
+      Serial.print(" ");
+      Serial.println(chassis.SpeedRight());
+      //chassis.SerialPlotter(millis(), chassis.SpeedLeft(), chassis.SpeedRight(), 0, 0, 0, 0);
+      delay(50);
+      
+    }
+    */
+    
 }
 
 void loop() 
@@ -20,7 +36,7 @@ void loop()
     case ROBOT_IDLE:
       if(buttonA.getSingleDebouncedRelease()) 
       {
-        chassis.StartDriving(100, 100, 10000); //contains your program that the robot executes when pushbutton A is pressed
+        chassis.StartDriving(50, 50, 10000); //contains your program that the robot executes when pushbutton A is pressed
         robot_state = ROBOT_DRIVING;
       }
       break;
